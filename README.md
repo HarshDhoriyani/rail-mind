@@ -133,7 +133,29 @@ curl -X POST http://localhost:8002/emergency/assess \
   -d '{"incident_type":"fire_hazard","location":"Platform 3, Dadar","severity":"critical","risk_score":92}'
 ```
 
-### 4. Delay Propagation Intelligence *(planned)*
+### 4. Interactive Railway Command Dashboard ✅ *(built)*
+
+A real-time control room dashboard with live map, CCTV viewer, alerts, emergency recommendations, and an AI chat assistant.
+
+| Component | Description |
+|-----------|-------------|
+| **Live Network Map** | Leaflet map with train positions (color-coded: on-time/delayed/critical), stations (crowd density), and risk zone circles |
+| **CCTV Feed Viewer** | Simulated multi-camera feed with auto-rotate and thumbnail navigation |
+| **Risk Alert Panel** | Scrollable list of active alerts with severity badges, icons, and relative timestamps |
+| **Emergency Recommendations** | Collapsible cards with step-by-step actions, priorities, and assigned stakeholders |
+| **AI Chat Assistant** | Conversational interface answering queries about delays, risks, emergencies, and trains |
+
+**Tech:** Next.js 16, TypeScript, Tailwind CSS, Leaflet, Lucide Icons
+
+#### Usage
+
+```bash
+cd dashboard
+npm run dev
+# Opens at http://localhost:3000
+```
+
+### 5. Delay Propagation Intelligence *(planned)*
 
 Predict how a single delayed train cascades across the network.
 
@@ -167,9 +189,11 @@ Conversational agent that operators can query:
 | LLM (optional) | OpenAI (GPT-4o-mini) |
 | Rule Engine | Built-in fallback (7 incident types) |
 | Backend | FastAPI |
+| Frontend | Next.js + TypeScript + Tailwind |
+| Maps | Leaflet (react-leaflet) |
+| Icons | Lucide React |
 | Database | PostgreSQL |
 | Realtime | WebSockets + Redis |
-| Frontend | Next.js + React + Tailwind |
 | Deployment | Docker |
 
 ---
@@ -180,6 +204,22 @@ Conversational agent that operators can query:
 rail-mind/
 ├── data/                      # Sample images and videos
 ├── models/                    # Trained model files
+├── dashboard/                 # Interactive Command Center (Next.js)
+│   ├── src/
+│   │   ├── app/
+│   │   ├── components/
+│   │   │   ├── DashboardHeader.tsx
+│   │   │   ├── MapView.tsx
+│   │   │   ├── CctvFeed.tsx
+│   │   │   ├── RiskAlertPanel.tsx
+│   │   │   ├── EmergencyRecommendations.tsx
+│   │   │   └── AiChatAssistant.tsx
+│   │   └── lib/
+│   │       ├── types.ts
+│   │       ├── mockData.ts
+│   │       └── api.ts
+│   ├── package.json
+│   └── next.config.ts
 ├── modules/
 │   ├── __init__.py
 │   ├── detection/             # Human/Obstacle Detection (YOLOv8 + ByteTrack)
@@ -273,6 +313,15 @@ uvicorn modules.emergency_agent.app:app --host 0.0.0.0 --port 8002
 # With LLM
 export OPENAI_API_KEY=sk-...
 uvicorn modules.emergency_agent.app:app --host 0.0.0.0 --port 8002
+```
+
+### Run Dashboard
+
+```bash
+cd dashboard
+npm install
+npm run dev
+# Opens at http://localhost:3000
 ```
 
 ---

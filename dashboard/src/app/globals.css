@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #334155 transparent;
+}
+
+body {
+  background: #0f172a;
+  color: #e2e8f0;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+.leaflet-popup-content-wrapper {
+  background: #1e293b !important;
+  color: #e2e8f0 !important;
+  border-radius: 8px !important;
+  font-size: 12px !important;
+}
+
+.leaflet-popup-tip {
+  background: #1e293b !important;
+}
